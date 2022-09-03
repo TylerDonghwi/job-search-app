@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { jobStatus } from './Jobs'
 
 type jobProps = {
     id: number,
@@ -8,17 +9,11 @@ type jobProps = {
     contact: string
 }
 
-export default function Job({ id, name, creationDate, client, contact }: jobProps) {
+export default function Job({ name, creationDate, client, contact }: jobProps) {
 
-    enum jobStatus {
-        SCHEDULED = 'scheduled',
-        ACTIVE = 'active',
-        INVOICING = 'invoicing',
-        TO_PRICED = 'to priced',
-        COMPLETED = 'completed',
-    }
 
-    const [status, setStatus] = useState<jobStatus>(jobStatus.SCHEDULED)
+
+    const [status, setStatus] = useState<string>(jobStatus.SCHEDULED)
 
     return (
         <div className="m-2 border border-orange-500 shadow-md rounded-md">
@@ -32,7 +27,22 @@ export default function Job({ id, name, creationDate, client, contact }: jobProp
                 <div className="text-sm text-gray-500">
                     posted by {client} &#xb7; contact: {contact}
                 </div>
-                <div>Status: {status}</div>
+                <div>
+                    <div>Status: {status}</div>
+                    <label>Change Schedule:</label>
+                    <select
+                        onChange={(e) => setStatus(e.target.value)}
+                        className='outline-none'
+                    >
+                        <option value={jobStatus.SCHEDULED}>scheduled</option>
+                        <option value={jobStatus.ACTIVE}>active</option>
+                        <option value={jobStatus.INVOICING}>invoicing</option>
+                        <option value={jobStatus.TO_PRICED}>to priced</option>
+                        <option value={jobStatus.COMPLETED}>completed</option>
+                    </select>
+
+                </div>
+
                 <button
                     className='relative text-white rounded-sm p-1 m-1 bg-orange-500 hover:bg-orange-600 active:bg-orange-700'
                     onClick={() => console.log(`viewing notes for ${name}`)}
