@@ -12,10 +12,9 @@ export default function Jobs() {
         setOrder(event.target.value)
     }
 
-    const sortByName = (a: { id: string; }, b: { id: string; }) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0)
+    const sortByName = (a: { name: string; }, b: { name: string; }) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
     const sortByDate = (a: { creationDate: string; }, b: { creationDate: string; }) => (a.creationDate < b.creationDate) ? 1 : ((b.creationDate < a.creationDate) ? -1 : 0)
-    const sortDefault = (a: { id: string; }, b: { id: string; }) => 0
-
+    const sortDefault = (a: { id: number; }, b: { id: number; }) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0)
 
     // filtering
     const [filterValue, setFilterValue] = useState("")
@@ -39,10 +38,9 @@ export default function Jobs() {
                     <input type="text" value={filterValue} onChange={handleInputChange} />
                 </div>
             </div>
-
             <div className="grid xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 {jobsList.sort(order === "date" ? sortByDate : order === "name" ? sortByName : sortDefault)
-                    .filter(job => job.id.toLowerCase().includes(filterValue.toLowerCase()))
+                    .filter(job => job.name.toLowerCase().includes(filterValue.toLowerCase()))
                     .map(job => (
                         <div key={job.id}>
                             <Job {...job} />

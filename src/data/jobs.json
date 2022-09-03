@@ -1,60 +1,72 @@
 [{
-    "id": "Formwork Carpenter",
+    "id": 1,
+    "name": "Formwork Carpenter",
     "creationDate": "2022-09-03 13:45",
     "client": "Hugh Farmer",
     "contact": "(737) 712-0256"
 }, {
-    "id": "Project Manager - Landscapes",
+    "id": 2,
+    "name": "Project Manager - Landscapes",
     "creationDate": "2022-09-02 16:45",
     "client": "Calvert Row",
     "contact": "(676) 212-4553"
 }, {
-    "id": "Interior Installer",
+    "id": 3,
+    "name": "Interior Installer",
     "creationDate": "2022-08-29 09:00",
     "client": "Horace Payne",
     "contact": "(990) 543-6739"
 }, {
-    "id": "Production Supervisor",
+    "id": 4,
+    "name": "Production Supervisor",
     "creationDate": "2022-08-29 11:50",
     "client": "Jefferson Greenwood",
     "contact": "(234) 381-7198"
 }, {
-    "id": "Builders",
+    "id": 5,
+    "name": "Builders",
     "creationDate": "2022-09-01 16:17",
     "client": "George Redwood",
     "contact": "(393) 825-4921"
 }, {
-    "id": "Trade Sales Support",
+    "id": 6,
+    "name": "Trade Sales Support",
     "creationDate": "2022-09-02 10:45",
     "client": "Caesar Stokes",
     "contact": "(664) 894-9558"
 }, {
-    "id": "Site Manager",
+    "id": 7,
+    "name": "Site Manager",
     "creationDate": "2022-08-30 12:00",
     "client": "Troy Jensen",
     "contact": "(726) 258-8164"
 }, {
-    "id": "Maintenance Fitter",
+    "id": 8,
+    "name": "Maintenance Fitter",
     "creationDate": "2022-09-02 14:40",
     "client": "Troy Jensen",
     "contact": "(494) 406-8589"
 }, {
-    "id": "Automotive Technician",
+    "id": 9,
+    "name": "Automotive Technician",
     "creationDate": "2022-08-26 10:00",
     "client": "Harvey May",
     "contact": "(519) 587-0043"
 }, {
-    "id": "Diesel Mechanic",
+    "id": 10,
+    "name": "Diesel Mechanic",
     "creationDate": "2022-09-02 12:00",
     "client": "James Wood",
     "contact": "(846) 539-2621"
 }, {
-    "id": "Heavy Equipment Technincian",
+    "id": 11,
+    "name": "Heavy Equipment Technincian",
     "creationDate": "2022-08-29 15:15",
     "client": "Gale Shelton",
     "contact": "(688) 562-4996"
 }, {
-    "id": "Service Advisor",
+    "id": 12,
+    "name": "Service Advisor",
     "creationDate": "2022-09-02 09:00",
     "client": "Alex Johnston",
     "contact": "(257) 752-1774"
