@@ -23,8 +23,8 @@ export default function Jobs() {
 
     return (
         <div>
-            <div className='flex justify-between border shadow-md mx-4 lg:mx-8 my-4 p-4 rounded-lg'>
-                <div>
+            <div className='flex justify-between flex-col md:flex-row border shadow-md mx-4 lg:mx-8 my-4 p-4 rounded-lg'>
+                <div className='m-1'>
                     <label>Sort by: </label>
                     <select
                         onChange={e => setOrder(e.target.value)}
@@ -35,7 +35,7 @@ export default function Jobs() {
                         <option value="date">Most Recent</option>
                     </select>
                 </div>
-                <div>
+                <div className='m-1'>
                     <label>Filter by job-status: </label>
                     <select
                         onChange={e => setStatusFilter(e.target.value)}
@@ -50,13 +50,13 @@ export default function Jobs() {
                         <option value={jobStatus.COMPLETED}>completed</option>
                     </select>
                 </div>
-                <div>
+                <div className='m-1'>
                     <label>Search jobs: </label>
                     <input
                         type="text"
                         value={searchValue}
                         onChange={e => setSearchValue(e.target.value)}
-                        className='outline-none border rounded'
+                        className='outline-none border rounded pl-1'
                         placeholder=''
                     />
                 </div>
