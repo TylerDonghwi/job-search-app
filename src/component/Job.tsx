@@ -39,6 +39,12 @@ export default function Job({ name, creationDate, client, contact }: jobProps) {
         setEditingText(note.note)
     }
 
+    const cancelEditing = () => {
+        setEditingOn(false)
+        setNoteEditing(undefined)
+        setEditingText('')
+    }
+
     const editNote = (id: number) => {
         const newNote: note[] = [...notes].map((note) => {
             if (id === note.id) {
@@ -75,7 +81,7 @@ export default function Job({ name, creationDate, client, contact }: jobProps) {
                     <label>Change Status:</label>
                     <select
                         onChange={(e) => setStatus(e.target.value)}
-                        className='outline-none'
+                        className='outline-none border rounded ml-1'
                     >
                         <option value={jobStatus.SCHEDULED}>scheduled</option>
                         <option value={jobStatus.ACTIVE}>active</option>
@@ -101,6 +107,7 @@ export default function Job({ name, creationDate, client, contact }: jobProps) {
                                             type="text"
                                             value={editingText}
                                             onChange={e => setEditingText(e.target.value)}
+                                            onKeyDown={e => e.key === "Enter" ? editNote(note.id) : null}
                                         />)
                                         :
                                         (<span
@@ -109,6 +116,10 @@ export default function Job({ name, creationDate, client, contact }: jobProps) {
                                     }
                                 </div>
                                 <div>
+                                    <button
+                                        className={'relative text-white rounded-sm h-[32px]w-[80px] m-1 p-1 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 ' + (editingOn && noteEditing === note.id ? 'inline' : 'hidden')}
+                                        onClick={cancelEditing}
+                                    >Cancel</button>
                                     <button
                                         className={'relative text-white rounded-sm h-[32px]w-[80px] m-1 p-1 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 ' + (editingOn ? 'hidden' : 'inline')}
                                         onClick={() => setEditing(note)}
