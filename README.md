@@ -24,6 +24,7 @@
 <h4>Users can sort (either by alphabettically or by dates), filter (by the job status) or search the jobs (by the title of the job).</h4>
 
 <h5>Sorting</h5>
+
 ![sorting](images/sorting.gif)
 
 
