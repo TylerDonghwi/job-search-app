@@ -14,11 +14,15 @@ export default function Jobs() {
 
     // sorting
     const [order, setOrder] = useState('default')
+    // filtering
     const [statusFilter, setStatusFilter] = useState('')
+    // searching
     const [searchValue, setSearchValue] = useState('')
 
     const sortByName = (a: { name: string; }, b: { name: string; }) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
+    const sortByNameReverse = (a: { name: string; }, b: { name: string; }) => (a.name < b.name) ? 1 : ((b.name < a.name) ? -1 : 0)
     const sortByDate = (a: { creationDate: string; }, b: { creationDate: string; }) => (a.creationDate < b.creationDate) ? 1 : ((b.creationDate < a.creationDate) ? -1 : 0)
+    const sortByDateReverse = (a: { creationDate: string; }, b: { creationDate: string; }) => (a.creationDate > b.creationDate) ? 1 : ((b.creationDate > a.creationDate) ? -1 : 0)
     const sortDefault = (a: { id: number; }, b: { id: number; }) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0)
 
     return (
@@ -31,8 +35,10 @@ export default function Jobs() {
                         className='outline-none border rounded'
                     >
                         <option value="default">Default</option>
-                        <option value="name">Alphabetically</option>
-                        <option value="date">Most Recent</option>
+                        <option value="name1">Alphabetically (a-z)</option>
+                        <option value="name2">Alphabetically (z-a)</option>
+                        <option value="date1">Most Recent</option>
+                        <option value="date2">Least Recent</option>
                     </select>
                 </div>
                 <div className='m-1'>
@@ -62,11 +68,11 @@ export default function Jobs() {
                 </div>
             </div>
             <div className="grid xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                {jobsList.sort(order === "date" ? sortByDate : order === "name" ? sortByName : sortDefault)
+                {jobsList.sort(order === "date1" ? sortByDate : order === "date2" ? sortByDateReverse : order === "name1" ? sortByName : order === "name2" ? sortByNameReverse : sortDefault)
                     .filter(job => job.name.toLowerCase().includes(searchValue.toLowerCase()))
                     .map(job => (
                         <div key={job.id}>
-                            <Job {...job} />
+                            <Job job={job} statusFilter={statusFilter} />
                         </div>
                     ))}
             </div>
