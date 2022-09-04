@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { jobStatus } from './Jobs'
 import useLocalStorage from '../hook/useLocalStorage'
+import uuid from 'react-uuid';
+
 
 type jobProps = {
     id: number,
@@ -28,15 +30,13 @@ export default function Job(prop: { job: jobProps, statusFilter: string }) {
     const [notes, setNotes] = useLocalStorage<note[]>(`notes${prop.job.id}`, [])
 
     // editing notes
-    const [noteCounter, setNoteCounter] = useState<number>(0)
     const [editingOn, setEditingOn] = useState<boolean>(false)
     const [noteEditing, setNoteEditing] = useState<number | undefined>()
     const [editingText, setEditingText] = useState('')
 
     const addNote = () => {
         if (inputValue === '') return
-        setNoteCounter(noteCounter + 1)
-        setNotes([...notes, { id: noteCounter, note: inputValue }])
+        setNotes([...notes, { id: uuid(), note: inputValue }])
         setInputValue('')
     }
 
@@ -77,7 +77,8 @@ export default function Job(prop: { job: jobProps, statusFilter: string }) {
                 {prop.job.name}
             </div>
             <div className='m-2'>
-                created on: {prop.job.creationDate}
+                created on: {prop.job.creationDate}<br />
+                Status: {status}
             </div>
             <button
                 className='relative text-white rounded-sm p-1 mx-2 bg-orange-500 hover:bg-orange-600 active:bg-orange-700'
@@ -90,7 +91,6 @@ export default function Job(prop: { job: jobProps, statusFilter: string }) {
 
             <div className={visibility ? 'block' : 'hidden'}>
                 <div className='m-2'>
-                    <div>Status: {status}</div>
                     <div className='text-gray-700'>
                         posted by {prop.job.client}<br />
                         contact: {prop.job.contact}<br />
@@ -140,7 +140,7 @@ export default function Job(prop: { job: jobProps, statusFilter: string }) {
                                         onClick={() => editNote(note.id)}
                                     >Submit</button>
                                     <button
-                                        className='relative text-white rounded-sm h-[32px]w-[80px] m-1 p-1 bg-orange-500 hover:bg-orange-600 active:bg-orange-700'
+                                        className={'relative text-white rounded-sm h-[32px]w-[80px] m-1 p-1 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 ' + (editingOn && noteEditing === note.id ? 'hidden' : 'inline')}
                                         onClick={() => deleteNote(note.id)}
                                     >Delete</button>
                                 </div>
