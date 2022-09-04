@@ -27,9 +27,31 @@
 
 ![sorting](images/sorting.gif)
 
+<h5>Filtering</h5>
+
+![filtering](images/filtering.gif)
+
+<h5>Searching</h5>
+
+![searching](images/searching.gif)
+
 
 <h2>Job Information, Changing Job Status and Notes</h2>
 <h4>User can click the button to see the details of the job and user can change job status, make notes, edit or remove existing notes on the job.</h4>
 
+<h5>Detail Expansion, Note Adding, Editing, Removing</h5>
+
+![notes](images/expandNotes.gif)
+
+<h5>Changing Job Status</h5>
+
+![status](images/jobstatus.gif)
+
+
 <h2>Local Storage</h2>
 <h4>The job status and the notes are stored in the localstorage of the browser, allowing users to come back and see their previous notes and check the job statuses.</h4>
+
+<h5>Storing Data in Local Storage</h5>
+
+![localstorage](images/localStorage.gif)
+
