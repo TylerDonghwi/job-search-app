@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { jobStatus } from './Jobs'
+import useLocalStorage from '../hook/useLocalStorage'
 
 type jobProps = {
     id: number,
@@ -14,13 +15,17 @@ type note = {
     note: string
 }
 
-export default function Job({ name, creationDate, client, contact }: jobProps) {
+export default function Job({ id, name, creationDate, client, contact }: jobProps) {
 
-    const [status, setStatus] = useState<string>(jobStatus.SCHEDULED)
+    // job status
+    const [status, setStatus] = useLocalStorage<string>(`status[${id}]`, jobStatus.SCHEDULED)
+
+    // notes in general
     const [visibility, setVisibility] = useState<boolean>(false)
     const [inputValue, setInputValue] = useState<string>('')
-    const [notes, setNotes] = useState<note[]>([])
+    const [notes, setNotes] = useLocalStorage<note[]>(`notes${id}`, [])
 
+    // editing notes
     const [noteCounter, setNoteCounter] = useState<number>(0)
     const [editingOn, setEditingOn] = useState<boolean>(false)
     const [noteEditing, setNoteEditing] = useState<number | undefined>()
@@ -80,9 +85,10 @@ export default function Job({ name, creationDate, client, contact }: jobProps) {
                     <div>Status: {status}</div>
                     <label>Change Status:</label>
                     <select
-                        onChange={(e) => setStatus(e.target.value)}
+                        onChange={(e) => e.target.value !== '' ? setStatus(e.target.value) : null}
                         className='outline-none border rounded ml-1'
                     >
+                        <option value=''></option>
                         <option value={jobStatus.SCHEDULED}>scheduled</option>
                         <option value={jobStatus.ACTIVE}>active</option>
                         <option value={jobStatus.INVOICING}>invoicing</option>
@@ -93,12 +99,16 @@ export default function Job({ name, creationDate, client, contact }: jobProps) {
 
                 <button
                     className='relative text-white rounded-sm p-1 my-1 bg-orange-500 hover:bg-orange-600 active:bg-orange-700'
-                    onClick={() => { setVisibility(!visibility) }}
+                    onClick={() => {
+                        setVisibility(!visibility)
+                        cancelEditing()
+                        setInputValue('')
+                    }}
                 >{visibility ? 'Hide Details' : 'Show Details'}</button>
 
                 <div className={'' + (visibility ? 'block' : 'hidden')}>
                     <div>
-                        {notes.map(note => (
+                        {notes.map((note: { id: number; note: string }) => (
                             <div key={note.id} className='flex flex-row justify-between items-center'>
                                 <div>&bull;
                                     {noteEditing === note.id ?
